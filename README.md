@@ -131,3 +131,25 @@ sudo ./nifi.sh status
 ls /tmp/nifi_input
 ls /tmp/nifi_pass
 ls /tmp/nifi_fail
+
+
+
+
+
+
+
+
+
+sudo systemctl status postgresql
+
+sudo systemctl start postgresql
+
+sudo -i -u postgres psql
+
+\l
+
+alter user postgres with password 'root';
+
+\q
+
+sudo pgadmin4
