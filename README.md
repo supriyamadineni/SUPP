@@ -1,155 +1,148 @@
-1st question
-cd /opt
-ls
-cd nifi-2.7.2
-cd bin
-ls
+1 EXPERIMENT
+python code
+def add(a, b):
+    return a + b
 
-sudo ./nifi.sh start
+def test_add():
+    assert add(2, 3) == 5
 
-sudo ./nifi.sh set-single-user-credentials chitti uma1234567890
+test_add()
+print("Test Passed")
+yaml code 
+name: Python Test
 
-sudo ./nifi.sh restart
+on: [push]
 
-sudo ./nifi.sh status
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-mkdir -p /tmp/nifi_input
-mkdir -p /tmp/nifi_output
-mkdir -p /tmp/nifi_staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-cat > /tmp/nifi_input/students_raw.csv << 'EOF'
-id,name,marks,department
-1,ravi,85,CSE
-2,anitha,90,ECE
-3,ravi,85,CSE
-4,kiran,45,ECE
-EOF
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
 
-ls /tmp/nifi_staging/
-cat /tmp/nifi_staging/students_raw.csv
-2nd one
-# Start NiFi
-cd /opt/nifi-2.7.2/bin
-sudo ./nifi.sh start
-
-# Create input and output directories
-mkdir -p /tmp/nifi_input
-mkdir -p /tmp/nifi_output
-
-# Create sample CSV file
-cat > /tmp/nifi_input/students.csv << 'EOF'
-id,name,marks,department
-1,ravi,85,CSE
-2,anitha,90,ECE
-3,kiran,75,CSE
-4,meena,88,EEE
-EOF
-
-# Open NiFi UI
-# http://localhost:8080/nifi
-
-# ---- NiFi Flow Configuration ----
-
-# Add Processor: GetFile
-# Properties:
-# Input Directory = /tmp/nifi_input
-
-# Add Controller Service:
-# CSVReader
-
-# Add Controller Service:
-# JsonRecordSetWriter
-
-# Add Processor: ConvertRecord
-# Properties:
-# Record Reader = CSVReader
-# Record Writer = JsonRecordSetWriter
-
-# Add Processor: PutFile
-# Properties:
-# Directory = /tmp/nifi_output
-
-# Connect:
-# GetFile -> ConvertRecord -> PutFile
-
-# Start all processors in NiFi UI
-
-# ---- Check Output ----
-ls /tmp/nifi_output
-cat /tmp/nifi_output/students.json
-
-# Check NiFi status
-sudo ./nifi.sh status
-3rd one
-cd /opt/nifi-2.7.2/bin
-sudo ./nifi.sh start
-
-mkdir -p /tmp/nifi_input
-
-cat > /tmp/nifi_input/students.csv << 'EOF'
-id,name,marks,department
-1,ravi,85,CSE
-2,anitha,90,ECE
-3,kiran,75,CSE
-4,meena,88,EEE
-EOF
-
-sudo -u postgres psql
-CREATE DATABASE college_db;
-\c college_db
-CREATE TABLE students (
-id INT,
-name TEXT,
-marks INT,
-department TEXT
-);
-\q
-
-sudo ./nifi.sh status
-
-sudo -u postgres psql -d college_db
-SELECT * FROM students;
-\q
-4th
-cd /opt/nifi-2.7.2/bin
-sudo ./nifi.sh start
-
-mkdir -p /tmp/nifi_input
-mkdir -p /tmp/nifi_pass
-mkdir -p /tmp/nifi_fail
-
-cat > /tmp/nifi_input/students.csv << 'EOF'
-id,name,marks,department
-1,ravi,85,CSE
-2,anitha,40,ECE
-3,kiran,75,CSE
-4,meena,30,EEE
-EOF
-
-sudo ./nifi.sh status
-
-ls /tmp/nifi_input
-ls /tmp/nifi_pass
-ls /tmp/nifi_fail
+      - name: Run test
+        run: python app.py
+commands
+git init
+git config --global user.name "your_name"
+git config --global user.email "your_email"
+git remote add origin <repo_url>
+mkdir .github
+cd .github
+mkdir workflows
+cd workflows
+type nul > bsr.yml
+cd ..
+cd ..
+git add .
+git commit -m "initial commit"
+git branch -M main
+git push -u origin main
 
 
 
 
+GIT COMMANDS
+mkdir my-repo
+cd my-repo
+git init
+git add README.md
+git commit -m "Initial commit with README"
+git remote add origin https://github.com/your-username/my-repo.git
+git branch -M main
+git push -u origin main
+or or or or
+git init
+git status
+git add .
+git config --global user.name "your_name"
+git config --global user.email "your_email"
+git remote add origin <repo_url>
+git commit -m "hello"
+git push -u origin main
+
+git branch
+git checkout -b MITS
+git add .
+git commit -m "changed"
+git push
+git push --set-upstream origin MITS
+git pull
+
+git log
+git log --oneline
+
+git clone <repo_url>
+cd <repository_name>
+git status
+
+git add .
+git commit -m "saved"
+git branch -M main
+git push -u origin main
 
 
 
+SELENIUM
+GOOGLE
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
 
+driver = webdriver.Edge()
 
-sudo systemctl status postgresql
+driver.get("https://www.google.com")
+time.sleep(2)
 
-sudo systemctl start postgresql
+search_box = driver.find_element(By.NAME, "q")
+print("Search box element found:", search_box)
 
-sudo -i -u postgres psql
+driver.quit()
 
-\l
+FACEBOOK
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
 
-alter user postgres with password 'root';
+driver = webdriver.Edge()
 
-\q
+driver.get("https://www.facebook.com")
+time.sleep(2)
 
-sudo pgadmin4
+email = driver.find_element(By.ID, "email")
+password = driver.find_element(By.ID, "pass")
+
+email.send_keys("your_email")
+password.send_keys("your_password")
+
+login = driver.find_element(By.NAME, "login")
+login.click()
+
+time.sleep(5)
+
+driver.quit()
+
+WEB ELEMENTS
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+driver = webdriver.Edge()
+
+driver.get("https://www.google.com")
+time.sleep(2)
+
+search_box = driver.find_element(By.NAME, "q")
+search_box.send_keys("Selenium Python")
+search_box.send_keys(Keys.RETURN)
+
+time.sleep(5)
+
+driver.quit()
